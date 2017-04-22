@@ -1,8 +1,5 @@
 package com.whiletrue.littleprince;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
-
 /**
  * Created by boris_0mrym3f on 22.04.2017.
  */
@@ -16,8 +13,6 @@ public class Prince extends AbstractObjectOnPlanet {
 
     Prince(Planet planet, float angle) {
         super(planet, angle);
-
-        setPosition(1,1);
     }
 
     protected String getTextureFileName(){
@@ -33,6 +28,7 @@ public class Prince extends AbstractObjectOnPlanet {
 
     @Override
     public void act(float delta){
+        //currentAngle-=0.01f;
     }
 
 

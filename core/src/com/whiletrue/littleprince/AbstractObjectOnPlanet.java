@@ -25,6 +25,8 @@ public abstract class AbstractObjectOnPlanet extends Actor{
         currentAngle = angle;
 
         configureSizeAndOrigin();
+
+        calculatePositionAndRotation();
     }
 
     protected abstract String getTextureFileName();
@@ -33,7 +35,29 @@ public abstract class AbstractObjectOnPlanet extends Actor{
 
     @Override
     public void draw(Batch batch, float alpha){
+        calculatePositionAndRotation();
         batch.draw(textureRegion,getX(),getY(),getOriginX(),getOriginY(),getWidth(),getHeight(),getScaleX(),getScaleY(),getRotation());
     }
+
+
+    protected void calculatePositionAndRotation(){
+        float angle = currentAngle + degreesToRadians(planet.getRotation());
+        float radius = planet.getPlanetOutline().getPhysicalRadiusForAngle(currentAngle);
+        float planetCenterX = planet.getXOfOrigin();
+        float planetCenterY = planet.getYOfOrigin();
+        float xOfOrigin = planetCenterX + (float)(radius*Math.cos(angle));
+        float yOfOrigin = planetCenterY + (float)(radius*Math.sin(angle));
+        setPosition(xOfOrigin-getOriginX(), yOfOrigin-getOriginY());
+        setRotation(radiansToDegrees(angle-(float)(0.5 * Math.PI)));
+    }
+
+    float degreesToRadians(float degrees){
+        return (float)(degrees*Math.PI/180f);
+    }
+
+    float radiansToDegrees(float degrees){
+        return (float)(degrees*180f/Math.PI);
+    }
+
 
 }

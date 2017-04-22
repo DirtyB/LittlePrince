@@ -19,7 +19,8 @@ public class GameScreen implements Screen {
     public static final int MIN_VISIBLE_WORLD_WIDTH = 5;
     public static final int MIN_VISIBLE_WORLD_HEIGHT = 5;
 
-    public static final float PLANET_RADIUS = 2f;
+    public static final float PLANET_DRAWING_RADIUS = 2f;
+    public static final float PLANET_PHYSICAL_RADIUS = 1.6f;
 
     public final LittlePrinceGame game;
 
@@ -42,7 +43,7 @@ public class GameScreen implements Screen {
         stage.getCamera().position.set(0,0,0);
         Gdx.input.setInputProcessor(stage);
 
-        planet = new Planet(PLANET_RADIUS);
+        planet = new Planet(PLANET_DRAWING_RADIUS, PLANET_PHYSICAL_RADIUS);
         prince = new Prince(planet,(float)(Math.PI*0.5));
 
         //myActor.setTouchable(Touchable.enabled);
