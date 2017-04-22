@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
  * Created by boris_0mrym3f on 22.04.2017.
  */
 public class Planet extends Actor {
-    private Texture texture = new Texture("planet.jpg");
+    private Texture texture = new Texture("planet.png");
     private float rotationSpeed = 10f;
     private PlanetOutline planetOutline;
     PolygonSprite sprite;
