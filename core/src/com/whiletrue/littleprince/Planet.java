@@ -14,7 +14,7 @@ public class Planet extends Actor {
     private Texture texture = new Texture("planet.png");
     private float rotationSpeed = 5f;
     private PlanetOutline planetOutline;
-    PolygonSprite sprite;
+    PolygonRegion region;
 
 
     public Planet(float radius){
@@ -31,24 +31,20 @@ public class Planet extends Actor {
 
         float[] vertices = planetOutline.getVertices(graphicRadius,graphicRadius,graphicRadius);
 
-        PolygonRegion region = new PolygonRegion(textureRegion, vertices, PlanetOutline.TRIANGLES);
+        region = new PolygonRegion(textureRegion, vertices, PlanetOutline.TRIANGLES);
 
-        sprite = new PolygonSprite(region);
-        sprite.setSize(radius*2,radius*2);
-        sprite.setOrigin(radius,radius);
-        sprite.setPosition(0-radius,0-radius);
-
-        sprite.setColor(0,0.5f,0,1);
+        setSize(radius*2,radius*2);
+        setOrigin(radius,radius);
+        setPosition(0-radius,0-radius);
     }
 
     @Override
     public void draw(Batch batch, float alpha){
-        sprite.draw((PolygonSpriteBatch)batch);
-        //batch.draw(texture,-2,-2,4,4);
+        ((PolygonSpriteBatch)batch).draw(region,getX(),getY(),getOriginX(),getOriginY(),getWidth(),getHeight(),getScaleX(),getScaleY(),getRotation());
     }
 
     @Override
     public void act(float delta){
-        sprite.setRotation(sprite.getRotation()+rotationSpeed*delta);
+        setRotation(getRotation()+rotationSpeed*delta);
     }
 }

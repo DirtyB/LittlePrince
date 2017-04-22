@@ -1,24 +1,12 @@
 package com.whiletrue.littleprince;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.Transform;
-import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by boris_0mrym3f on 22.04.2017.
@@ -40,6 +28,7 @@ public class GameScreen implements Screen {
     private Stage stage;
 
     private Planet planet;
+    private Prince prince;
 
     private boolean isPaused = false;
 
@@ -54,23 +43,20 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         planet = new Planet(PLANET_RADIUS);
+        prince = new Prince(planet,(float)(Math.PI*0.5));
+
         //myActor.setTouchable(Touchable.enabled);
         stage.addActor(planet);
+        stage.addActor(prince);
     }
 
     @Override
     public void render(float deltaTime) {
-        // clear the screen with a dark blue color. The
-        // arguments to glClearColor are the red, green
-        // blue and alpha component in the range [0,1]
-        // of the color to be used to clear the screen.
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
-
     }
 
     @Override
