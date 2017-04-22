@@ -1,4 +1,4 @@
-package com.true.while;
+package com.whiletrue.littleprince;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;

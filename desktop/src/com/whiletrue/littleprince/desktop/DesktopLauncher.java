@@ -1,8 +1,8 @@
-package com.true.while.desktop;
+package com.whiletrue.littleprince.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.true.while.LittlePrinceGame;
+import com.whiletrue.littleprince.LittlePrinceGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

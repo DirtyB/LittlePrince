@@ -1,9 +1,9 @@
-package com.true.while.client;
+package com.whiletrue.littleprince.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.true.while.LittlePrinceGame;
+import com.whiletrue.littleprince.LittlePrinceGame;
 
 public class HtmlLauncher extends GwtApplication {
 
