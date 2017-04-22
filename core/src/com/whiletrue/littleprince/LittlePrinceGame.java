@@ -1,57 +1,20 @@
 package com.whiletrue.littleprince;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScalingViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 
-public class LittlePrinceGame extends ApplicationAdapter {
-	private Stage stage;
-	private Planet planet;
-	private Batch batch;
+public class LittlePrinceGame extends Game {
+	Batch batch;
 
 	@Override
-	public void create() {
-
-		//todo: viewport
-		Viewport viewport = new ScalingViewport(Scaling.stretch, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
+	public void create () {
 		batch = new PolygonSpriteBatch();
-
-		stage = new Stage(viewport,batch);
-		Gdx.input.setInputProcessor(stage);
-
-		planet = new Planet(1);
-		//myActor.setTouchable(Touchable.enabled);
-		stage.addActor(planet);
+		this.setScreen(new GameScreen(this));
 	}
 
 	@Override
-	public void dispose() {
+	public void dispose () {
+		batch.dispose();
 	}
-
-	@Override
-	public void render() {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-	}
-
-	@Override
-	public void pause() {
-	}
-
-	@Override
-	public void resume() {
-	}
-
 }
