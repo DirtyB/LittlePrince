@@ -3,45 +3,55 @@ package com.whiletrue.littleprince;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class LittlePrinceGame extends ApplicationAdapter {
-	PolygonSpriteBatch batch;
-	Texture texture;
-	PolygonRegion region;
-	
+	private Stage stage;
+	private Planet planet;
+	private Batch batch;
+
 	@Override
-	public void create () {
-		texture = new Texture("planet.jpg");
-		TextureRegion textureRegion = new TextureRegion(texture);
+	public void create() {
 
-		float radius = 0.5f*textureRegion.getRegionWidth();
+		//todo: viewport
+		Viewport viewport = new ScalingViewport(Scaling.stretch, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new OrthographicCamera());
+		Batch batch = new PolygonSpriteBatch();
 
-		PlanetOutline planetOutline = new PlanetOutline(1);
+		stage = new Stage(viewport,batch);
+		Gdx.input.setInputProcessor(stage);
 
-		planetOutline.cutLine(0.5f,-0.5f);
-		planetOutline.cutLine(-0.5f,-0.5f);
-
-		float[] vertices = planetOutline.getVertices(radius,radius,radius);
-
-		region = new PolygonRegion(textureRegion, vertices, PlanetOutline.TRIANGLES);
-		batch = new PolygonSpriteBatch();
-		//debugRenderer = new PolygonRegionDebugRenderer();
+		planet = new Planet(1);
+		//myActor.setTouchable(Touchable.enabled);
+		stage.addActor(planet);
 	}
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+	public void dispose() {
+	}
+
+	@Override
+	public void render() {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(region, 128, 128, 256, 256);
-		batch.end();
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 	}
-	
+
 	@Override
-	public void dispose () {
-		batch.dispose();
-		texture.dispose();
+	public void resize(int width, int height) {
 	}
+
+	@Override
+	public void pause() {
+	}
+
+	@Override
+	public void resume() {
+	}
+
 }
