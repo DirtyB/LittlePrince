@@ -10,7 +10,7 @@ import org.ejml.simple.SimpleMatrix;
  */
 public class PlanetOutline {
 
-    private final static short SEGMENT_COUNT = 30;
+    private final static short SEGMENT_COUNT = 360;
     public final static short[] TRIANGLES = new short[SEGMENT_COUNT*3];
 
     static {

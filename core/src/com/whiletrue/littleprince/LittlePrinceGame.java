@@ -20,11 +20,12 @@ public class LittlePrinceGame extends ApplicationAdapter {
 
 		PlanetOutline planetOutline = new PlanetOutline(1);
 
-		planetOutline.cutLine(1f,0.5f);
+		planetOutline.cutLine(0.5f,-0.5f);
+		planetOutline.cutLine(-0.5f,-0.5f);
 
-		float[] verticies = planetOutline.getVertices(radius,radius,radius);
+		float[] vertices = planetOutline.getVertices(radius,radius,radius);
 
-		region = new PolygonRegion(textureRegion, verticies, PlanetOutline.TRIANGLES);
+		region = new PolygonRegion(textureRegion, vertices, PlanetOutline.TRIANGLES);
 		batch = new PolygonSpriteBatch();
 		//debugRenderer = new PolygonRegionDebugRenderer();
 	}
