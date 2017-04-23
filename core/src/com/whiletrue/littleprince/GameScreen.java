@@ -70,10 +70,10 @@ public class GameScreen implements Screen {
         music = assetManager.get("music.mp3");
         music.play();
 
+        stage.addActor(bigStar);
         stage.addActor(star);
         stage.addActor(planet);
         stage.addActor(prince);
-        stage.addActor(bigStar);
        // stage.addActor(star);
 
     }
