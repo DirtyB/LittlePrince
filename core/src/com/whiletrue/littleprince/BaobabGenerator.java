@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 public class BaobabGenerator extends Actor{
 
-    private static final float BAOBAB_GENERATION_FREQUENCY = 1f;
+    private static final float BAOBAB_GENERATION_FREQUENCY = 0.5f;
     private static final float BAOBAB_GENERATION_PROBABILITY = 0.3f;
 
     private GameScreen screen;

@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
     public static final float PLANET_DRAWING_RADIUS = 3.0f;
     public static final float PLANET_PHYSICAL_RADIUS = 2.4f;
 
-    public static final int MAX_BAOBAB_COUNT = 100;
+    public static final int MAX_BAOBAB_COUNT = 20;
     public static final float MIN_ATTACK_DIST = 0.5f;
 
     public static final String MUSIC_FILE_NAME = "music.mp3";
@@ -97,6 +97,7 @@ public class GameScreen implements Screen {
 
     public void addBaobab(float angle){
         if(baobabs.size()>=MAX_BAOBAB_COUNT) {
+            game.endGame();
             return;
         }
         Baobab baobab = new Baobab(this,angle);

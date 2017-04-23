@@ -17,7 +17,7 @@ public class Baobab extends AbstractObjectOnPlanet {
     private static float BAOBAB_WIDTH = BAOBAB_HEIGHT;
     private static float BAOBAB_ORIGIN_RELATIVE_X = 0.5f;
     private static float BAOBAB_ORIGIN_RELATIVE_Y = 0.05f;
-    private static float FRAME_DURATION = 5;//5f;
+    private static float FRAME_DURATION = 3;//5f;
 
     private static float BAOBAB_HEATH_RATIO = 0.01f;
     private static float BAOBAB_MAX_HEALTH = 10;

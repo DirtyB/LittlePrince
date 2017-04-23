@@ -30,4 +30,8 @@ public class LittlePrinceGame extends Game {
 	public void startGame(){
 		this.setScreen(new GameScreen(this));
 	}
+
+	public void endGame(){
+		this.setScreen(new StartScreen(this));
+	}
 }
