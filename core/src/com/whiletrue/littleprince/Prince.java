@@ -45,7 +45,6 @@ public class Prince extends AbstractObjectOnPlanet {
     }
 
     protected TextureRegion getCurrentTextureRegion(){
-        //return stillTextureRegion;
         TextureRegion textureRegion;
 
         switch (state){
@@ -56,6 +55,7 @@ public class Prince extends AbstractObjectOnPlanet {
             default:
                 textureRegion = stillTextureRegion;
         }
+
         textureRegion.flip((direction>0) != textureRegion.isFlipX(),false);
         return textureRegion;
     }
