@@ -45,6 +45,7 @@ public class GameScreen implements Screen {
 
         game.assetManager.load("planet.png", Texture.class);
         game.assetManager.load("prince.png", Texture.class);
+        game.assetManager.load("walk/walk.atlas", TextureAtlas.class);
 
         game.assetManager.finishLoading();
 

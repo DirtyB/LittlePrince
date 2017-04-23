@@ -1,6 +1,9 @@
 package com.whiletrue.littleprince;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -9,20 +12,30 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Prince extends AbstractObjectOnPlanet {
 
     private static String PRINCE_TEXTURE_FILE_NAME = "prince.png";
-    private static float PRINCE_WIDTH = 0.5f;
-    private static float PRINCE_HEIGHT = PRINCE_WIDTH*2;
+    private static float PRINCE_HEIGHT = 1;
+    private static float PRINCE_WIDTH = PRINCE_HEIGHT*2/3;
     private static float PRINCE_ORIGIN_RELATIVE_X = 0.5f;
     private static float PRINCE_ORIGIN_RELATIVE_Y = 0.05f;
+    private static final float FRAME_DURATION = 0.1f;
 
     private TextureRegion stillTextureRegion;
+    private Animation<TextureRegion> walkAnimation;
+
 
     Prince(GameScreen gameScreen, float angle) {
         super(gameScreen, angle);
-        stillTextureRegion = new TextureRegion((Texture) gameScreen.getGame().assetManager.get(PRINCE_TEXTURE_FILE_NAME));
+
+        AssetManager assetManager = gameScreen.getGame().assetManager;
+
+        stillTextureRegion = new TextureRegion((Texture)assetManager.get(PRINCE_TEXTURE_FILE_NAME));
+
+        TextureAtlas atlas = assetManager.get("walk/walk.atlas");
+        walkAnimation =  new Animation<TextureRegion>(FRAME_DURATION, atlas.findRegions("walk"), Animation.PlayMode.LOOP);
     }
 
     protected TextureRegion getCurrentTextureRegion(){
-        return stillTextureRegion;
+        //return stillTextureRegion;
+        return walkAnimation.getKeyFrame(stateTime, true);
     }
 
     @Override
@@ -34,6 +47,7 @@ public class Prince extends AbstractObjectOnPlanet {
 
     @Override
     public void act(float delta){
+        super.act(delta);
         currentAngle-=0.01f;
     }
 

@@ -7,6 +7,7 @@ buildscript {
     }
     dependencies {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
+        classpath "com.badlogicgames.gdx:gdx-tools:1.9.6"
     }
 }
 
@@ -86,4 +87,18 @@ project(":core") {
 
 tasks.eclipse.doLast {
     delete ".project"
+}
+
+// Store the parameters you want to pass the texturePacker here...
+project.ext.texturePacker = [ "core/assets/walk_src/", "core/assets/walk/", "walk" ]
+
+// Import the texture packer
+import com.badlogic.gdx.tools.texturepacker.TexturePacker
+
+// Add a new task that packs the textures for you
+task texturePacker << {
+    if (project.ext.has('texturePacker')) {
+        logger.info "Calling TexturePacker: "+texturePacker
+        TexturePacker.process(texturePacker[0], texturePacker[1], texturePacker[2])
+    }
 }

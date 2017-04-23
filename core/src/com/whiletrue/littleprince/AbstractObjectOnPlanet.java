@@ -15,6 +15,7 @@ public abstract class AbstractObjectOnPlanet extends Actor{
     protected GameScreen gameScreen;
     protected Planet planet;
     protected float currentAngle;
+    protected float stateTime;
 
     AbstractObjectOnPlanet(GameScreen gameScreen, float angle){
         this.gameScreen = gameScreen;
@@ -51,5 +52,9 @@ public abstract class AbstractObjectOnPlanet extends Actor{
         setRotation(radiansToDegrees(angle-(float)(0.5 * Math.PI)));
     }
 
-
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        stateTime+=delta;
+    }
 }
