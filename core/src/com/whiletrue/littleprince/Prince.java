@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Group;
 
 /**
  * Created by boris_0mrym3f on 22.04.2017.
@@ -41,7 +42,14 @@ public class Prince extends AbstractObjectOnPlanet {
 
         TextureAtlas atlas = assetManager.get(PRINCE_WALK_ANIMATION_ATLAS_NAME);
         walkAnimation =  new Animation<TextureRegion>(FRAME_DURATION, atlas.findRegions(PRINCE_WALK_ANIMATION_REGIONS_NAME), Animation.PlayMode.LOOP);
+    }
 
+    @Override
+    protected void setParent(Group parent) {
+        super.setParent(parent);
+        if(parent!=null){
+            setZIndex(30);
+        }
     }
 
     protected TextureRegion getCurrentTextureRegion(){

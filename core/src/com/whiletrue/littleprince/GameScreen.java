@@ -70,6 +70,8 @@ public class GameScreen implements Screen {
         prince = new Prince(this,(float)(Math.PI*0.5));
         baobabGenerator = new BaobabGenerator(this);
 
+        prince.toFront();
+
         stage.addActor(planet);
         stage.addActor(prince);
         stage.addActor(baobabGenerator);
