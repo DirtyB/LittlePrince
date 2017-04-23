@@ -26,10 +26,11 @@ public class GameScreen implements Screen {
     public static final int MIN_VISIBLE_WORLD_WIDTH = 9;
     public static final int MIN_VISIBLE_WORLD_HEIGHT = 9;
 
-    public static final float PLANET_DRAWING_RADIUS = 3.6f;
-    public static final float PLANET_PHYSICAL_RADIUS = 2.7f;
+    public static final float PLANET_DRAWING_RADIUS = 3.0f;
+    public static final float PLANET_PHYSICAL_RADIUS = 2.4f;
 
-    public static final int MAX_BAOBAB_COUNT = 1;//100;
+    public static final int MAX_BAOBAB_COUNT = 100;
+    public static final float MIN_ATTACK_DIST = 0.5f;
 
     public static final String MUSIC_FILE_NAME = "music.mp3";
 
@@ -110,9 +111,19 @@ public class GameScreen implements Screen {
 
     public void handleAttack(float damage){
         Baobab damagedBaobab = null;
-        if(baobabs.size()>0){
-            //todo
-            damagedBaobab = baobabs.iterator().next();
+
+        float minDist = WORLD_WIDTH*WORLD_HEIGHT;
+        Baobab closestBaobab = null;
+        for (Baobab baobab: baobabs){
+            float dist = prince.distance(baobab);
+            if (dist < minDist){
+                closestBaobab = baobab;
+                minDist = dist;
+            }
+        }
+        System.out.println("closest Baobab^ " + minDist);
+        if(closestBaobab != null && minDist <= MIN_ATTACK_DIST){
+            damagedBaobab = closestBaobab;
         }
 
         if(damagedBaobab != null){

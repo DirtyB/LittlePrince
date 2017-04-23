@@ -13,13 +13,13 @@ public class Baobab extends AbstractObjectOnPlanet {
 
     public static String BAOBAB_ANIMATION_ATLAS_NAME = "baobab/baobab.atlas";
     public static String BAOBAB_ANIMATION_REGIONS_NAME = "baobab";
-    private static float BAOBAB_HEIGHT = 2f;
+    private static float BAOBAB_HEIGHT = 2.5f;
     private static float BAOBAB_WIDTH = BAOBAB_HEIGHT;
     private static float BAOBAB_ORIGIN_RELATIVE_X = 0.5f;
     private static float BAOBAB_ORIGIN_RELATIVE_Y = 0.05f;
-    private static float FRAME_DURATION = 1;//5f;
+    private static float FRAME_DURATION = 5;//5f;
 
-    private static float BAOBAB_HEATH_RATIO = 0.1f;
+    private static float BAOBAB_HEATH_RATIO = 0.01f;
     private static float BAOBAB_MAX_HEALTH = 10;
 
     private Animation<TextureRegion> baobabAnimation;
@@ -66,7 +66,7 @@ public class Baobab extends AbstractObjectOnPlanet {
 
     public void damage(float damage){
         health -= damage;
-        System.out.println(health);
+        System.out.println("Health: "+health);
         if (health < 0) {
             destroy();
         }

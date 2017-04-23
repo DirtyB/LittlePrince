@@ -57,4 +57,17 @@ public abstract class AbstractObjectOnPlanet extends Actor{
         super.act(delta);
         stateTime+=delta;
     }
+
+    public float getXOfOrigin(){
+        return getX()+getOriginX();
+    }
+    public float getYOfOrigin(){
+        return getY()+getOriginY();
+    }
+
+    public float distance(AbstractObjectOnPlanet that){
+        float x = this.getXOfOrigin() - that.getXOfOrigin();
+        float y = this.getYOfOrigin() - that.getYOfOrigin();
+        return (float) Math.sqrt( x*x + y*y );
+    }
 }
