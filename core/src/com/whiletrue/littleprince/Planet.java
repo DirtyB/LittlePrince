@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.PolygonRegion;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 
 /**
  * Created by boris_0mrym3f on 22.04.2017.
@@ -42,6 +43,14 @@ public class Planet extends Actor {
         setSize(drawingRadius*2,drawingRadius*2);
         setOrigin(drawingRadius,drawingRadius);
         setPosition(0-drawingRadius,0-drawingRadius);
+    }
+
+    @Override
+    protected void setParent(Group parent) {
+        super.setParent(parent);
+        if(parent!=null){
+            setZIndex(10);
+        }
     }
 
     @Override
