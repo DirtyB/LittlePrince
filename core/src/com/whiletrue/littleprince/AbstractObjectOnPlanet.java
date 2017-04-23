@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+import static com.whiletrue.littleprince.MathUtils.*;
+
 /**
  * Created by boris_0mrym3f on 22.04.2017.
  */
@@ -41,6 +43,7 @@ public abstract class AbstractObjectOnPlanet extends Actor{
 
 
     protected void calculatePositionAndRotation(){
+        currentAngle = normaliseAngle(currentAngle);
         float angle = currentAngle + degreesToRadians(planet.getRotation());
         float radius = planet.getPlanetOutline().getPhysicalRadiusForAngle(currentAngle);
         float planetCenterX = planet.getXOfOrigin();
@@ -49,14 +52,6 @@ public abstract class AbstractObjectOnPlanet extends Actor{
         float yOfOrigin = planetCenterY + (float)(radius*Math.sin(angle));
         setPosition(xOfOrigin-getOriginX(), yOfOrigin-getOriginY());
         setRotation(radiansToDegrees(angle-(float)(0.5 * Math.PI)));
-    }
-
-    float degreesToRadians(float degrees){
-        return (float)(degrees*Math.PI/180f);
-    }
-
-    float radiansToDegrees(float degrees){
-        return (float)(degrees*180f/Math.PI);
     }
 
 
