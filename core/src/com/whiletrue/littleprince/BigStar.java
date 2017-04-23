@@ -20,6 +20,8 @@ public class BigStar extends Actor {
     private Texture textureBackTherd = new Texture("littlestar2.png");
     private Texture textureBackForth = new Texture("littlestar3.png");
     private Texture textureRegionEffect = new Texture("backEffect.png");
+    private Texture textureRegionEffect2 = new Texture("start.png");
+
 
 
     private float rotationSpeed = 2.5f;
@@ -29,6 +31,8 @@ public class BigStar extends Actor {
     PolygonRegion regionSecond;
     Sprite sprite;
     Sprite spriteEffect;
+    Sprite spriteEffect2;
+
     Sprite spriteLittleStar;
     Sprite spriteLittleStar2;
     Sprite spriteLittleStar3;
@@ -42,6 +46,8 @@ public class BigStar extends Actor {
         TextureRegion textureRegionSecond = new TextureRegion(textureSecond);
         TextureRegion textureRegionBack = new TextureRegion(textureBack);
         TextureRegion textureRegionEffects = new TextureRegion(textureRegionEffect);
+        TextureRegion textureRegionEffects2 = new TextureRegion(textureRegionEffect2);
+
 
         float graphicRadius = 0.5f*textureRegion.getRegionWidth();
 
@@ -54,6 +60,8 @@ public class BigStar extends Actor {
         spriteLittleStar2 = new Sprite(textureBackTherd);
         spriteLittleStar3 = new Sprite(textureBackForth);
         spriteEffect = new Sprite(textureRegionEffects);
+        spriteEffect2 = new Sprite(textureRegionEffects2);
+
 
 
 
@@ -84,6 +92,8 @@ public class BigStar extends Actor {
 
         batch.draw(sprite,-9f, -4.5f,18,9);
         batch.draw(spriteEffect,-9f, -4.5f,18,9);
+        batch.draw(spriteEffect2,-9f, -4.5f,18,9);
+
 
 
 

@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 public class Planet extends Actor {
 
-    public static String PLANET_TEXTURE_FILE_NAME = "planet.png";
+    public static String PLANET_TEXTURE_FILE_NAME = "planet1.png";
 
     private float rotationSpeed = 20f;
 
