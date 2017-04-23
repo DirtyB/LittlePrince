@@ -29,6 +29,8 @@ public class GameScreen implements Screen {
     public static final float PLANET_DRAWING_RADIUS = 3.6f;
     public static final float PLANET_PHYSICAL_RADIUS = 2.7f;
 
+    public static final int MAX_BAOBAB_COUNT = 1;//100;
+
     public static final String MUSIC_FILE_NAME = "music.mp3";
 
     public final LittlePrinceGame game;
@@ -93,9 +95,29 @@ public class GameScreen implements Screen {
     }
 
     public void addBaobab(float angle){
+        if(baobabs.size()>=MAX_BAOBAB_COUNT) {
+            return;
+        }
         Baobab baobab = new Baobab(this,angle);
         baobabs.add(baobab);
         stage.addActor(baobab);
+    }
+
+    public void removeBaobab(Baobab baobab){
+        baobab.remove();
+        baobabs.remove(baobab);
+    }
+
+    public void handleAttack(float damage){
+        Baobab damagedBaobab = null;
+        if(baobabs.size()>0){
+            //todo
+            damagedBaobab = baobabs.iterator().next();
+        }
+
+        if(damagedBaobab != null){
+            damagedBaobab.damage(damage);
+        }
     }
 
     @Override

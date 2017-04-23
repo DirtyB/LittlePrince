@@ -30,6 +30,7 @@ public class Prince extends AbstractObjectOnPlanet {
     private float speedValue = 1f;
 
     private float speed = 0;
+    private float damageCapability = 5;
     private int direction = -1;
     private State state = State.STILL;
     private float attackDuration = 0;
@@ -128,6 +129,7 @@ public class Prince extends AbstractObjectOnPlanet {
     }
 
     public void endAttack(){
+        gameScreen.handleAttack(damageCapability);
         state = State.STILL;
         attackDuration = 0;
     }

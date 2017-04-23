@@ -1,9 +1,6 @@
 package com.whiletrue.littleprince;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -20,9 +17,14 @@ public class Baobab extends AbstractObjectOnPlanet {
     private static float BAOBAB_WIDTH = BAOBAB_HEIGHT;
     private static float BAOBAB_ORIGIN_RELATIVE_X = 0.5f;
     private static float BAOBAB_ORIGIN_RELATIVE_Y = 0.05f;
-    private static final float FRAME_DURATION = 1;//5f;
+    private static float FRAME_DURATION = 1;//5f;
+
+    private static float BAOBAB_HEATH_RATIO = 0.1f;
+    private static float BAOBAB_MAX_HEALTH = 10;
 
     private Animation<TextureRegion> baobabAnimation;
+
+    private float health = 0;
 
 
     Baobab(GameScreen gameScreen, float angle) {
@@ -54,8 +56,24 @@ public class Baobab extends AbstractObjectOnPlanet {
 
 
     @Override
-    public void act(float delta){
+    public void act(float delta) {
         super.act(delta);
+        health += BAOBAB_HEATH_RATIO + delta;
+        if (health > BAOBAB_MAX_HEALTH) {
+            health = BAOBAB_MAX_HEALTH;
+        }
+    }
+
+    public void damage(float damage){
+        health -= damage;
+        System.out.println(health);
+        if (health < 0) {
+            destroy();
+        }
+    }
+
+    public void destroy(){
+        gameScreen.removeBaobab(this);
     }
 
 }
