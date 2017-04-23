@@ -2,21 +2,18 @@ package com.whiletrue.littleprince;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by boris_0mrym3f on 22.04.2017.
@@ -39,13 +36,15 @@ public class GameScreen implements Screen {
     private OrthographicCamera camera;
     private Viewport viewport;
     private Stage stage;
+
+    private Star star;
+    private BigStar bigStar;
     private Music music;
 
     private Planet planet;
     private Prince prince;
-    private Star star;
-    private Sprite mapSprite;
-    private BigStar bigStar;
+    private BaobabGenerator baobabGenerator;
+    private Set<Baobab> baobabs = new HashSet<Baobab>();
 
     private boolean isPaused = false;
 
@@ -69,9 +68,11 @@ public class GameScreen implements Screen {
 
         planet = new Planet(game, PLANET_DRAWING_RADIUS, PLANET_PHYSICAL_RADIUS);
         prince = new Prince(this,(float)(Math.PI*0.5));
+        baobabGenerator = new BaobabGenerator(this);
 
         stage.addActor(planet);
         stage.addActor(prince);
+        stage.addActor(baobabGenerator);
 
         music = game.assetManager.get(MUSIC_FILE_NAME);
         music.play();
@@ -82,9 +83,16 @@ public class GameScreen implements Screen {
         game.assetManager.load(Planet.PLANET_TEXTURE_FILE_NAME, Texture.class);
         game.assetManager.load(Prince.PRINCE_STILL_TEXTURE_FILE_NAME, Texture.class);
         game.assetManager.load(Prince.PRINCE_WALK_ANIMATION_ATLAS_NAME, TextureAtlas.class);
+        game.assetManager.load(Baobab.BAOBAB_ANIMATION_ATLAS_NAME, TextureAtlas.class);
         game.assetManager.load(MUSIC_FILE_NAME, Music.class);
 
         game.assetManager.finishLoading();
+    }
+
+    public void addBaobab(float angle){
+        Baobab baobab = new Baobab(this,angle);
+        baobabs.add(baobab);
+        stage.addActor(baobab);
     }
 
     @Override
