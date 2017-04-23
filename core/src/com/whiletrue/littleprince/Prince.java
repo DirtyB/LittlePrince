@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /**
  * Created by boris_0mrym3f on 22.04.2017.
@@ -23,8 +22,11 @@ public class Prince extends AbstractObjectOnPlanet {
     private static float PRINCE_ORIGIN_RELATIVE_Y = 0.05f;
     private static final float FRAME_DURATION = 0.1f;
 
-    private float actualSpeed = 0;
     private float speedValue = 1f;
+
+    private float speed = 0;
+    private int direction = -1;
+    private State state = State.STILL;
 
     private TextureRegion stillTextureRegion;
     private Animation<TextureRegion> walkAnimation;
@@ -45,8 +47,16 @@ public class Prince extends AbstractObjectOnPlanet {
     protected TextureRegion getCurrentTextureRegion(){
         //return stillTextureRegion;
         TextureRegion textureRegion;
-        textureRegion = walkAnimation.getKeyFrame(stateTime, true);
-        textureRegion.flip((actualSpeed>0) != textureRegion.isFlipX(),false);
+
+        switch (state){
+            case WALK:
+                textureRegion = walkAnimation.getKeyFrame(stateTime, true);
+                break;
+            case STILL:
+            default:
+                textureRegion = stillTextureRegion;
+        }
+        textureRegion.flip((direction>0) != textureRegion.isFlipX(),false);
         return textureRegion;
     }
 
@@ -62,18 +72,26 @@ public class Prince extends AbstractObjectOnPlanet {
         super.act(delta);
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-            actualSpeed = speedValue;
+            speed = speedValue;
+            direction = 1;
         }
         else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            actualSpeed = -speedValue;
+            speed = -speedValue;
+            direction = -1;
         }
         else {
-            actualSpeed = 0;
+            speed = 0;
         }
 
-        currentAngle+=actualSpeed*delta;
+        state = (speed ==0) ? State.STILL : State.WALK;
+
+        currentAngle+= speed *delta;
 
     }
 
+    public enum State{
+        STILL,
+        WALK
+    }
 
 }
