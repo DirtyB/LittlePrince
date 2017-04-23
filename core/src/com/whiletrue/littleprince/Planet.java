@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
  */
 public class Planet extends Actor {
 
-    private static String TEXTURE_DESCRIPTOR = "planet.png";
+    public static String PLANET_TEXTURE_FILE_NAME = "planet.png";
 
     private float rotationSpeed = 20f;
 
@@ -27,7 +27,7 @@ public class Planet extends Actor {
 
         planetOutline = new PlanetOutline(drawingRadius, physicalRadius);
 
-        Texture texture = game.assetManager.get(TEXTURE_DESCRIPTOR);
+        Texture texture = game.assetManager.get(PLANET_TEXTURE_FILE_NAME);
         TextureRegion textureRegion = new TextureRegion(texture);
 
         float graphicRadius = 0.5f*textureRegion.getRegionWidth();

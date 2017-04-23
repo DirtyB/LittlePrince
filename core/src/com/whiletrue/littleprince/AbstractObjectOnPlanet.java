@@ -15,7 +15,7 @@ public abstract class AbstractObjectOnPlanet extends Actor{
     protected GameScreen gameScreen;
     protected Planet planet;
     protected float currentAngle;
-    protected float stateTime;
+    protected float stateTime=0;
 
     AbstractObjectOnPlanet(GameScreen gameScreen, float angle){
         this.gameScreen = gameScreen;

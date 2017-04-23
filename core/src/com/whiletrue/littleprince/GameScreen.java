@@ -43,11 +43,7 @@ public class GameScreen implements Screen {
     public GameScreen(final LittlePrinceGame game) {
         this.game = game;
 
-        game.assetManager.load("planet.png", Texture.class);
-        game.assetManager.load("prince.png", Texture.class);
-        game.assetManager.load("walk/walk.atlas", TextureAtlas.class);
-
-        game.assetManager.finishLoading();
+        loadAssets();
 
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(MIN_VISIBLE_WORLD_WIDTH,MIN_VISIBLE_WORLD_HEIGHT,WORLD_WIDTH,WORLD_HEIGHT,camera);
@@ -62,6 +58,14 @@ public class GameScreen implements Screen {
         //myActor.setTouchable(Touchable.enabled);
         stage.addActor(planet);
         stage.addActor(prince);
+    }
+
+    private void loadAssets(){
+        game.assetManager.load(Planet.PLANET_TEXTURE_FILE_NAME, Texture.class);
+        game.assetManager.load(Prince.PRINCE_STILL_TEXTURE_FILE_NAME, Texture.class);
+        game.assetManager.load(Prince.PRINCE_WALK_ANIMATION_ATLAS_NAME, TextureAtlas.class);
+
+        game.assetManager.finishLoading();
     }
 
     @Override
