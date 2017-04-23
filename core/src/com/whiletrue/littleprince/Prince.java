@@ -28,7 +28,7 @@ public class Prince extends AbstractObjectOnPlanet {
 
     @Override
     public void act(float delta){
-        //currentAngle-=0.01f;
+        currentAngle-=0.01f;
     }
 
 

@@ -31,6 +31,7 @@ public class PlanetOutline {
     }
 
     public float getPhysicalRadiusForAngle(float angle){
+        angle = normaliseAngle(angle);
         int segmentNumber = (int)(Math.round((angle/(2*Math.PI))*SEGMENT_COUNT)%SEGMENT_COUNT);
         return physicalRadiusValues[segmentNumber];
     }
@@ -79,6 +80,15 @@ public class PlanetOutline {
                 physicalRadiusValues[i] = (float)newRadius;
             }
         }
+    }
+
+    float normaliseAngle(float angle){
+        float twopi = (float)Math.PI * 2;
+        float remainder = angle%(twopi);
+        if(remainder<0){
+            remainder = twopi+remainder;
+        }
+        return remainder;
     }
 
     /*public Polygon getPolygon(){
