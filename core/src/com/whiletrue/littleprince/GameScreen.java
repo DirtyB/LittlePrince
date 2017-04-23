@@ -32,6 +32,8 @@ public class GameScreen implements Screen {
     public static final float PLANET_DRAWING_RADIUS = 3.6f;
     public static final float PLANET_PHYSICAL_RADIUS = 2.7f;
 
+    public static final String MUSIC_FILE_NAME = "music.mp3";
+
     public final LittlePrinceGame game;
 
     private OrthographicCamera camera;
@@ -71,7 +73,7 @@ public class GameScreen implements Screen {
         stage.addActor(planet);
         stage.addActor(prince);
 
-        music = game.assetManager.get("music.mp3");
+        music = game.assetManager.get(MUSIC_FILE_NAME);
         music.play();
 
     }
@@ -80,7 +82,7 @@ public class GameScreen implements Screen {
         game.assetManager.load(Planet.PLANET_TEXTURE_FILE_NAME, Texture.class);
         game.assetManager.load(Prince.PRINCE_STILL_TEXTURE_FILE_NAME, Texture.class);
         game.assetManager.load(Prince.PRINCE_WALK_ANIMATION_ATLAS_NAME, TextureAtlas.class);
-        game.assetManager.load("music.mp3", Music.class);
+        game.assetManager.load(MUSIC_FILE_NAME, Music.class);
 
         game.assetManager.finishLoading();
     }

@@ -6,35 +6,29 @@ filter: Nearest,Nearest
 repeat: none
 walk
   rotate: false
-  xy: 2, 2
-  size: 341, 512
-  orig: 341, 512
+  xy: 2, 508
+  size: 336, 504
+  orig: 336, 504
   offset: 0, 0
   index: 1
 walk
   rotate: false
-  xy: 345, 2
-  size: 341, 512
-  orig: 341, 512
+  xy: 2, 2
+  size: 336, 504
+  orig: 336, 504
   offset: 0, 0
   index: 2
-
-walk2.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
 walk
   rotate: false
-  xy: 2, 2
-  size: 341, 512
-  orig: 341, 512
+  xy: 340, 508
+  size: 336, 504
+  orig: 336, 504
   offset: 0, 0
   index: 3
 walk
   rotate: false
-  xy: 345, 2
-  size: 341, 512
-  orig: 341, 512
+  xy: 340, 2
+  size: 336, 504
+  orig: 336, 504
   offset: 0, 0
   index: 4
