@@ -18,10 +18,10 @@ public class Prince extends AbstractObjectOnPlanet {
     public static String PRINCE_ATTACK_TEXTURE_FILE_NAME = "prince_sword.png";
     public static String PRINCE_WALK_ANIMATION_ATLAS_NAME = "walk/walk.atlas";
     public static String PRINCE_WALK_ANIMATION_REGIONS_NAME = "walk";
-    private static float PRINCE_HEIGHT = 1.7f;
-    private static float PRINCE_WIDTH = PRINCE_HEIGHT*2/3;
-    private static float PRINCE_ORIGIN_RELATIVE_X = 0.5f;
-    private static float PRINCE_ORIGIN_RELATIVE_Y = 0.05f;
+    private static float PRINCE_HEIGHT = 2f;
+    private static float PRINCE_WIDTH = PRINCE_HEIGHT*212/252;
+    private static float PRINCE_ORIGIN_RELATIVE_X = 0.33f;
+    private static float PRINCE_ORIGIN_RELATIVE_Y = 0.1f;
     private static final float FRAME_DURATION = 0.1f;
     private static final float ATTACK_DURATION = 0.2f;
 
