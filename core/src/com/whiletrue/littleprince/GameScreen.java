@@ -10,9 +10,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by boris_0mrym3f on 22.04.2017.
@@ -25,9 +29,8 @@ public class GameScreen implements Screen {
     public static final int MIN_VISIBLE_WORLD_WIDTH = 9;
     public static final int MIN_VISIBLE_WORLD_HEIGHT = 9;
 
-    public static final float PLANET_DRAWING_RADIUS = 2f;
-    public static final float PLANET_PHYSICAL_RADIUS = 1.6f;
-
+    public static final float PLANET_DRAWING_RADIUS = 3.6f;
+    public static final float PLANET_PHYSICAL_RADIUS = 2.7f;
 
     public final LittlePrinceGame game;
 
@@ -35,7 +38,6 @@ public class GameScreen implements Screen {
     private Viewport viewport;
     private Stage stage;
     private Music music;
-    private AssetManager assetManager;
 
     private Planet planet;
     private Prince prince;
@@ -43,12 +45,12 @@ public class GameScreen implements Screen {
     private Sprite mapSprite;
     private BigStar bigStar;
 
-
-
     private boolean isPaused = false;
 
     public GameScreen(final LittlePrinceGame game) {
         this.game = game;
+
+        loadAssets();
 
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(MIN_VISIBLE_WORLD_WIDTH,MIN_VISIBLE_WORLD_HEIGHT,WORLD_WIDTH,WORLD_HEIGHT,camera);
@@ -57,25 +59,30 @@ public class GameScreen implements Screen {
         stage.getCamera().position.set(0,0,0);
         Gdx.input.setInputProcessor(stage);
 
-        planet = new Planet(PLANET_DRAWING_RADIUS, PLANET_PHYSICAL_RADIUS);
-        prince = new Prince(planet,(float)(Math.PI*0.5));
         star= new Star(PLANET_DRAWING_RADIUS , PLANET_PHYSICAL_RADIUS);
         bigStar= new BigStar(PLANET_DRAWING_RADIUS , PLANET_PHYSICAL_RADIUS);
 
-
-        assetManager = new AssetManager();
-        assetManager.load("music.mp3", Music.class);
-        assetManager.finishLoading();
-
-        music = assetManager.get("music.mp3");
-        music.play();
-
         stage.addActor(bigStar);
         stage.addActor(star);
+
+        planet = new Planet(game, PLANET_DRAWING_RADIUS, PLANET_PHYSICAL_RADIUS);
+        prince = new Prince(this,(float)(Math.PI*0.5));
+
         stage.addActor(planet);
         stage.addActor(prince);
-       // stage.addActor(star);
 
+        music = game.assetManager.get("music.mp3");
+        music.play();
+
+    }
+
+    private void loadAssets(){
+        game.assetManager.load(Planet.PLANET_TEXTURE_FILE_NAME, Texture.class);
+        game.assetManager.load(Prince.PRINCE_STILL_TEXTURE_FILE_NAME, Texture.class);
+        game.assetManager.load(Prince.PRINCE_WALK_ANIMATION_ATLAS_NAME, TextureAtlas.class);
+        game.assetManager.load("music.mp3", Music.class);
+
+        game.assetManager.finishLoading();
     }
 
     @Override
@@ -85,8 +92,6 @@ public class GameScreen implements Screen {
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
-
     }
 
     @Override
@@ -118,5 +123,11 @@ public class GameScreen implements Screen {
         stage.dispose();
     }
 
+    public Planet getPlanet() {
+        return planet;
+    }
 
+    public LittlePrinceGame getGame() {
+        return game;
+    }
 }

@@ -2,6 +2,8 @@ package com.whiletrue.littleprince;
 
 import org.ejml.simple.SimpleMatrix;
 
+import static com.whiletrue.littleprince.MathUtils.*;
+
 /**
  * Created by boris_0mrym3f on 22.04.2017.
  */
@@ -31,6 +33,7 @@ public class PlanetOutline {
     }
 
     public float getPhysicalRadiusForAngle(float angle){
+        angle = normaliseAngle(angle);
         int segmentNumber = (int)(Math.round((angle/(2*Math.PI))*SEGMENT_COUNT)%SEGMENT_COUNT);
         return physicalRadiusValues[segmentNumber];
     }
@@ -80,4 +83,9 @@ public class PlanetOutline {
             }
         }
     }
+
+    /*public Polygon getPolygon(){
+        return new Polygon(getVertices());
+    }*/
+
 }

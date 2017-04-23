@@ -1,22 +1,63 @@
 package com.whiletrue.littleprince;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 /**
  * Created by boris_0mrym3f on 22.04.2017.
  */
 public class Prince extends AbstractObjectOnPlanet {
 
-    private static String PRINCE_TEXTURE_FILE_NAME = "prince.png";
-    private static float PRINCE_WIDTH = 0.5f;
-    private static float PRINCE_HEIGHT = PRINCE_WIDTH*2;
+    public static String PRINCE_STILL_TEXTURE_FILE_NAME = "prince.png";
+    public static String PRINCE_WALK_ANIMATION_ATLAS_NAME = "walk/walk.atlas";
+    public static String PRINCE_WALK_ANIMATION_REGIONS_NAME = "walk";
+    private static float PRINCE_HEIGHT = 1.7f;
+    private static float PRINCE_WIDTH = PRINCE_HEIGHT*2/3;
     private static float PRINCE_ORIGIN_RELATIVE_X = 0.5f;
     private static float PRINCE_ORIGIN_RELATIVE_Y = 0.05f;
+    private static final float FRAME_DURATION = 0.1f;
 
-    Prince(Planet planet, float angle) {
-        super(planet, angle);
+    private float speedValue = 1f;
+
+    private float speed = 0;
+    private int direction = -1;
+    private State state = State.STILL;
+
+    private TextureRegion stillTextureRegion;
+    private Animation<TextureRegion> walkAnimation;
+
+
+    Prince(GameScreen gameScreen, float angle) {
+        super(gameScreen, angle);
+
+        AssetManager assetManager = gameScreen.getGame().assetManager;
+
+        stillTextureRegion = new TextureRegion((Texture)assetManager.get(PRINCE_STILL_TEXTURE_FILE_NAME));
+
+        TextureAtlas atlas = assetManager.get(PRINCE_WALK_ANIMATION_ATLAS_NAME);
+        walkAnimation =  new Animation<TextureRegion>(FRAME_DURATION, atlas.findRegions(PRINCE_WALK_ANIMATION_REGIONS_NAME), Animation.PlayMode.LOOP);
+
     }
 
-    protected String getTextureFileName(){
-        return PRINCE_TEXTURE_FILE_NAME;
+    protected TextureRegion getCurrentTextureRegion(){
+        TextureRegion textureRegion;
+
+        switch (state){
+            case WALK:
+                textureRegion = walkAnimation.getKeyFrame(stateTime, true);
+                break;
+            case STILL:
+            default:
+                textureRegion = stillTextureRegion;
+        }
+
+        textureRegion.flip((direction>0) != textureRegion.isFlipX(),false);
+        return textureRegion;
     }
 
     @Override
@@ -28,8 +69,29 @@ public class Prince extends AbstractObjectOnPlanet {
 
     @Override
     public void act(float delta){
-        //currentAngle-=0.01f;
+        super.act(delta);
+
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+            speed = speedValue;
+            direction = 1;
+        }
+        else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+            speed = -speedValue;
+            direction = -1;
+        }
+        else {
+            speed = 0;
+        }
+
+        state = (speed ==0) ? State.STILL : State.WALK;
+
+        currentAngle+= speed *delta;
+
     }
 
+    public enum State{
+        STILL,
+        WALK
+    }
 
 }

@@ -1,30 +1,39 @@
 package com.whiletrue.littleprince;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.PolygonRegion;
+import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 /**
  * Created by boris_0mrym3f on 22.04.2017.
  */
 public class Planet extends Actor {
-    private Texture texture = new Texture("planet.png");
+
+    public static String PLANET_TEXTURE_FILE_NAME = "planet.png";
+
     private float rotationSpeed = 20f;
+
+    public LittlePrinceGame game;
 
     private PlanetOutline planetOutline;
     PolygonRegion region;
 
 
-    public Planet(float drawingRadius, float physicalRadius){
+    public Planet(LittlePrinceGame game, float drawingRadius, float physicalRadius){
+        this.game = game;
+
         planetOutline = new PlanetOutline(drawingRadius, physicalRadius);
 
+        Texture texture = game.assetManager.get(PLANET_TEXTURE_FILE_NAME);
         TextureRegion textureRegion = new TextureRegion(texture);
 
         float graphicRadius = 0.5f*textureRegion.getRegionWidth();
+
+        //planetOutline.cutLine(0.5f,-0.5f);
+        //planetOutline.cutLine(-0.5f,-0.5f);
 
         float[] vertices = planetOutline.getVertices(graphicRadius,graphicRadius,graphicRadius);
 
@@ -55,5 +64,7 @@ public class Planet extends Actor {
     public float getYOfOrigin(){
         return getY()+getOriginY();
     }
+
+
 
 }
