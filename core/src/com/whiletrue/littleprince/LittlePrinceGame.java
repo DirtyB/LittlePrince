@@ -28,10 +28,12 @@ public class LittlePrinceGame extends Game {
 	}
 
 	public void startGame(){
+		this.getScreen().dispose();
 		this.setScreen(new GameScreen(this));
 	}
 
 	public void endGame(){
+		this.getScreen().dispose();
 		this.setScreen(new StartScreen(this));
 	}
 }
