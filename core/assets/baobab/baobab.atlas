@@ -1,53 +1,41 @@
 
 baobab.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-baobab
-  rotate: false
-  xy: 2, 477
-  size: 512, 473
-  orig: 512, 473
-  offset: 0, 0
-  index: 1
-baobab
-  rotate: false
-  xy: 2, 2
-  size: 512, 473
-  orig: 512, 473
-  offset: 0, 0
-  index: 2
-
-baobab2.png
-size: 1024,1024
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-baobab
-  rotate: false
-  xy: 2, 477
-  size: 512, 473
-  orig: 512, 473
-  offset: 0, 0
-  index: 3
-baobab
-  rotate: false
-  xy: 2, 2
-  size: 512, 473
-  orig: 512, 473
-  offset: 0, 0
-  index: 4
-
-baobab3.png
 size: 1024,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 baobab
   rotate: false
+  xy: 2, 256
+  size: 273, 252
+  orig: 273, 252
+  offset: 0, 0
+  index: 1
+baobab
+  rotate: false
   xy: 2, 2
-  size: 512, 473
-  orig: 512, 473
+  size: 273, 252
+  orig: 273, 252
+  offset: 0, 0
+  index: 2
+baobab
+  rotate: false
+  xy: 277, 256
+  size: 273, 252
+  orig: 273, 252
+  offset: 0, 0
+  index: 3
+baobab
+  rotate: false
+  xy: 277, 2
+  size: 273, 252
+  orig: 273, 252
+  offset: 0, 0
+  index: 4
+baobab
+  rotate: false
+  xy: 552, 256
+  size: 273, 252
+  orig: 273, 252
   offset: 0, 0
   index: 5
