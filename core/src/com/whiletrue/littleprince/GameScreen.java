@@ -85,6 +85,7 @@ public class GameScreen implements Screen {
         game.assetManager.load(Planet.PLANET_TEXTURE_FILE_NAME, Texture.class);
         game.assetManager.load(Prince.PRINCE_STILL_TEXTURE_FILE_NAME, Texture.class);
         game.assetManager.load(Prince.PRINCE_WALK_ANIMATION_ATLAS_NAME, TextureAtlas.class);
+        game.assetManager.load(Prince.PRINCE_ATTACK_TEXTURE_FILE_NAME, Texture.class);
         game.assetManager.load(Baobab.BAOBAB_ANIMATION_ATLAS_NAME, TextureAtlas.class);
         game.assetManager.load(MUSIC_FILE_NAME, Music.class);
 
