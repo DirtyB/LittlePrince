@@ -2,11 +2,18 @@ package com.whiletrue.littleprince;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by boris_0mrym3f on 22.04.2017.
@@ -36,6 +43,11 @@ public class GameScreen implements Screen {
     public GameScreen(final LittlePrinceGame game) {
         this.game = game;
 
+        game.assetManager.load("planet.png", Texture.class);
+        game.assetManager.load("prince.png", Texture.class);
+
+        game.assetManager.finishLoading();
+
         camera = new OrthographicCamera();
         viewport = new ExtendViewport(MIN_VISIBLE_WORLD_WIDTH,MIN_VISIBLE_WORLD_HEIGHT,WORLD_WIDTH,WORLD_HEIGHT,camera);
 
@@ -43,8 +55,8 @@ public class GameScreen implements Screen {
         stage.getCamera().position.set(0,0,0);
         Gdx.input.setInputProcessor(stage);
 
-        planet = new Planet(PLANET_DRAWING_RADIUS, PLANET_PHYSICAL_RADIUS);
-        prince = new Prince(planet,(float)(Math.PI*0.5));
+        planet = new Planet(game, PLANET_DRAWING_RADIUS, PLANET_PHYSICAL_RADIUS);
+        prince = new Prince(this,(float)(Math.PI*0.5));
 
         //myActor.setTouchable(Touchable.enabled);
         stage.addActor(planet);
@@ -88,5 +100,11 @@ public class GameScreen implements Screen {
         stage.dispose();
     }
 
+    public Planet getPlanet() {
+        return planet;
+    }
 
+    public LittlePrinceGame getGame() {
+        return game;
+    }
 }

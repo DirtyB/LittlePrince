@@ -12,17 +12,13 @@ import static com.whiletrue.littleprince.MathUtils.*;
  */
 public abstract class AbstractObjectOnPlanet extends Actor{
 
-    protected String textureFile;
+    protected GameScreen gameScreen;
     protected Planet planet;
     protected float currentAngle;
 
-    protected TextureRegion textureRegion;
-
-    AbstractObjectOnPlanet(Planet planet, float angle){
-        this.planet = planet;
-
-        Texture texture = new Texture(getTextureFileName());
-        textureRegion = new TextureRegion(texture);
+    AbstractObjectOnPlanet(GameScreen gameScreen, float angle){
+        this.gameScreen = gameScreen;
+        this.planet = gameScreen.getPlanet();
 
         currentAngle = angle;
 
@@ -31,12 +27,13 @@ public abstract class AbstractObjectOnPlanet extends Actor{
         calculatePositionAndRotation();
     }
 
-    protected abstract String getTextureFileName();
+    protected abstract TextureRegion getCurrentTextureRegion();
 
     protected abstract void configureSizeAndOrigin();
 
     @Override
     public void draw(Batch batch, float alpha){
+        TextureRegion textureRegion = getCurrentTextureRegion();
         calculatePositionAndRotation();
         batch.draw(textureRegion,getX(),getY(),getOriginX(),getOriginY(),getWidth(),getHeight(),getScaleX(),getScaleY(),getRotation());
     }

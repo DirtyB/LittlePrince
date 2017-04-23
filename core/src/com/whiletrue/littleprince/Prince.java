@@ -1,5 +1,8 @@
 package com.whiletrue.littleprince;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 /**
  * Created by boris_0mrym3f on 22.04.2017.
  */
@@ -11,12 +14,15 @@ public class Prince extends AbstractObjectOnPlanet {
     private static float PRINCE_ORIGIN_RELATIVE_X = 0.5f;
     private static float PRINCE_ORIGIN_RELATIVE_Y = 0.05f;
 
-    Prince(Planet planet, float angle) {
-        super(planet, angle);
+    private TextureRegion stillTextureRegion;
+
+    Prince(GameScreen gameScreen, float angle) {
+        super(gameScreen, angle);
+        stillTextureRegion = new TextureRegion((Texture) gameScreen.getGame().assetManager.get(PRINCE_TEXTURE_FILE_NAME));
     }
 
-    protected String getTextureFileName(){
-        return PRINCE_TEXTURE_FILE_NAME;
+    protected TextureRegion getCurrentTextureRegion(){
+        return stillTextureRegion;
     }
 
     @Override
