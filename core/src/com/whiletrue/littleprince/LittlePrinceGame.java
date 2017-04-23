@@ -18,12 +18,16 @@ public class LittlePrinceGame extends Game {
 		assetManager = new AssetManager();
 
 		batch = new PolygonSpriteBatch();
-		this.setScreen(new GameScreen(this));
+		this.setScreen(new StartScreen(this));
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
 		assetManager.dispose();
+	}
+
+	public void startGame(){
+		this.setScreen(new GameScreen(this));
 	}
 }
